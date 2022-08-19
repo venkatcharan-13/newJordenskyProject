@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Fetching Apis</title>
+</head>
+
+<body style="background-color: #f4f5fa">
+    <div class="CreateUserHeading" style="margin-left: 150px;margin-top:80px">
+        <label for="userForm">
+            <h2>JordenSky-Admin</h2>
+        <p><strong>Fetch Apis</strong></p>
+        </label>
+    </div>
+
+
+    <div class="mainForm shadow-sm" style="margin-top:10px;margin-left:150px;width:80%;padding:20px;background-color:white;border-radius:5px" id="userForm">
+        <form name="form">
+            {% csrf_token %}
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-2 col-form-label">Username</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" id="GetUserName" placeholder="User Name">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-2 col-form-label">Organisation Id</label>
+                <div class="col-sm-5">
+                    <input type="number" class="form-control" id="GetOrganisationId" placeholder="User organisation id ">
+                </div>
+            </div>
+
+        </form>
+        <div class="row">
+            <div class="col-12" style="display: flex;justify-content:flex-end"><button type="submit" class="btn btn-primary" onclick="fetchApiOfUser()">Fetch Api</button></div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script>
+        endpoint = 'fetchapiTotal'
+
+        function fetchApiOfUser() {
+            var userName = $('#GetUserName').val();
+            var userOrganisationId = $('#GetOrganisationId').val();
+            $.ajax({
+                url: endpoint,
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify({
+                    userName: userName,
+                    userOrganisationId: userOrganisationId
+                }),
+                dataType: 'json',
+            }).done(function(data) {
+                console.log("Fetched Api Done");
+                document.location.reload();
+            }).fail(function(error) {
+                console.log("Not able to Fetch Api");
+            });
+        }
+    </script>
+</body>
+
+</html>

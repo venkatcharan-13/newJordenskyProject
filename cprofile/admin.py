@@ -28,3 +28,6 @@ class CompanyAdmin(admin.ModelAdmin):
     ]
 
 admin.site.register(Company, CompanyAdmin)
+
+
+

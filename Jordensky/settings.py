@@ -77,9 +77,9 @@ WSGI_APPLICATION = 'Jordensky.wsgi.application'
 DATABASES = {
    'default': {
        'ENGINE': 'django.db.backends.postgresql',
-       'NAME': 'Jordensky',
+       'NAME': 'jhl',
        'USER': 'postgres',
-       'PASSWORD': 'postgres',
+       'PASSWORD': 'pragna',
        'HOST': '127.0.0.1',
        'PORT': '5432',
    }
@@ -164,3 +164,10 @@ JAZZMIN_SETTINGS = {
     ],
     "changeform_format": "vertical_tabs",
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_USE_TLS=True
+EMAIL_PORT=587
+EMAIL_HOST_USER='banotuvenkatcharan2002@gmail.com'
+EMAIL_HOST_PASSWORD='vtggbgbcehxpddec'

@@ -1,85 +1,139 @@
-{% extends 'analytics_base.html' %}
-{% load static %}
-{% block title %}Analytics | MIS Report{% endblock title %}
-{% block active %}active{% endblock active %}
-{% block body %}
+{% extends 'analytics_base.html' %} {% load static %} {% block title %}Analytics | MIS Report{% endblock title %} {% block active %}active{% endblock active %} {% block body %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
-<h1>Graphs</h1><br>
-<div class="container">
-  <h3 style="text-align: center;">Sales Performance</h3>
-  <div class="row mb-5">
-    <div class="col-12">
-      <canvas id="sales_performance1"></canvas>
+<br>
+<div class="TopRow">
+    <div class="row">
+        <div class="col-6">
+            <h1>Graphs</h1>
+        </div>
+        <div class="col-6 dropDownBtn">
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              Export As
+            </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" type="button" onclick="ExportExcel()">Excel</a></li>
+                    <li><a class="dropdown-item" type="button" onclick="ExportPdf()">Pdf</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="row mb-5">
-    <div class="col-6">
-      <canvas id="sales_performance2"></canvas>
-    </div>
-    <div class="col-6">
-      <canvas id="sales_performance3"></canvas>
-    </div>
-  </div>
-  <div class="row mb-5">
-    <div class="col-6">
-      <canvas id="income_vs_expenses"></canvas>
-    </div>
-    <div class="col-6">
-      <canvas id="inflow_vs_outflow"></canvas>
-    </div>
-  </div>
-  <div class="row mb-5">
-    <div class="col-6">
-      <canvas id="closing_bank_balance"></canvas>
-    </div>
-    <div class="col-6">
-      <canvas id="gross_and_net_profit"></canvas>
-    </div>
-  </div>
-  <div class="row mb-5">
-    <div class="col-6">
-      <canvas id="monthly_runaway"></canvas>
-    </div>
-    <div class="col-6">
-      <canvas id="gp_expenses_ebitda"></canvas>
-    </div>
-  </div>
-  <div class="row mb-5">
-    <div class="col-12">
-      <canvas id="monthly_cashflow"></canvas>
-    </div>
-  </div>
 </div>
-<h1>Tabular Summaries</h1><br>
-<h2>P&L Summary</h2>
-<table class="table table-bordered">
-  <thead class="table-dark" id="pnl_head">
-  </thead>
-  <tbody id="pnl_summary">
-
-  </tbody>
-</table>
 <br>
-<h2>Balance Sheet Summary</h2>
-<table class="table table-bordered">
-  <thead class="table-dark" id="bal_sheet_head">
-  </thead>
-  <tbody id="bal_sheet_summary">
+<div class="container">
+    <h3 style="text-align: center;">Sales Performance</h3>
+    <div class="row mb-5">
+        <div class="col-12">
+            <canvas id="sales_performance1"></canvas>
+        </div>
+    </div>
+    <div class="row mb-5">
+        <div class="col-6">
+            <canvas id="sales_performance2"></canvas>
+        </div>
+        <div class="col-6">
+            <canvas id="sales_performance3"></canvas>
+        </div>
+    </div>
+    <div class="row mb-5">
+        <div class="col-6">
+            <canvas id="income_vs_expenses"></canvas>
+        </div>
+        <div class="col-6">
+            <canvas id="inflow_vs_outflow"></canvas>
+        </div>
+    </div>
+    <div class="row mb-5">
+        <div class="col-6">
+            <canvas id="closing_bank_balance"></canvas>
+        </div>
+        <div class="col-6">
+            <canvas id="gross_and_net_profit"></canvas>
+        </div>
+    </div>
+    <div class="row mb-5">
+        <div class="col-6">
+            <canvas id="monthly_runaway"></canvas>
+        </div>
+        <div class="col-6">
+            <canvas id="gp_expenses_ebitda"></canvas>
+        </div>
+    </div>
+    <div class="row mb-5">
+        <div class="col-12">
+            <canvas id="monthly_cashflow"></canvas>
+        </div>
+    </div>
+</div>
 
-  </tbody>
+
+<table data-cols-width="20,10,10,10,10,10,10" data-a-h="left" style="width: 100%;">
+    <tbody>
+        <tr>
+            <td data-exclude="true">
+                <table class="table" data-cols-width="50" hidden>
+                    <thead>
+                        <tr data-fill-color="FFFFOOOO">
+                            <td colspan="7" data-f-bold="true" data-a-h="center">Company Name</td>
+                        </tr>
+                        <tr data-fill-color="FFFFOOOO">
+                            <td colspan="7" data-f-bold="true" data-a-h="center">Date</td>
+                        </tr>
+                        <tr data-fill-color="FFFFOOOO">
+                            <td colspan="7" data-f-bold="true" data-a-h="center">P And L </td>
+                        </tr>
+                    </thead>
+                </table>
+            </td>
+        </tr>
+        <tr colspan="7" id="image-cell" data-hyperlink="">
+            <td><img src="" alt="" id="i"></td>
+        </tr>
+        <tr>
+            <td data-exclude="true">
+                <th colspan="7" hidden data-f-bold="true" data-a-h="center">Tabular Summaries</th>
+            </td>
+        </tr>
+        <tr data-exclude="true">
+            <td data-exclude="true">
+                <h1>Tabular Summaries</h1><br>
+                <h2>P&L Summary</h2>
+                <table class="table table-bordered">
+
+                    <th colspan="7" hidden data-f-bold="true">P&L Summary</th>
+                    <thead class="table-dark" id="pnl_head" data-f-bold="true">
+                    </thead>
+                    <tbody id="pnl_summary">
+
+                    </tbody>
+                </table>
+                <br>
+                <h2>Balance Sheet Summary</h2>
+                <table class="table table-bordered">
+                    <th colspan="7" hidden data-f-bold="true">Balance Sheet Summary</th>
+                    <thead class="table-dark" id="bal_sheet_head" data-f-bold="true">
+                    </thead>
+                    <tbody id="bal_sheet_summary">
+
+                    </tbody>
+                </table>
+                <br>
+                <h2>Cashflow Statement Summary</h2>
+                <table class="table table-bordered">
+                    <th colspan="7" hidden data-f-bold="true">Cashflow Statement Summary</th>
+                    <thead class="table-dark" id="cashflow_head" data-f-bold="true">
+                    </thead>
+                    <tbody id="cashflow_summary">
+
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
 </table>
-<br>
-<h2>Cashflow Statement Summary</h2>
-<table class="table table-bordered">
-  <thead class="table-dark" id="cashflow_head">
-  </thead>
-  <tbody id="cashflow_summary">
 
-  </tbody>
-</table>
 
-{% endblock body %}
 
-{% block script %}
+{% endblock body %} {% block script %}
 <script src="{% static 'js/report.js' %}"></script>
 {% endblock script %}

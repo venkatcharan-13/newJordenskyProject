@@ -1,0 +1,18 @@
+.nav-link {
+    color: black;
+}
+
+.nav-link:hover {
+    background-color: #d2d3d6;
+    color: black;
+}
+
+.CollectBtns {
+    margin-bottom: 7px;
+}
+
+.dropDownBtn {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}

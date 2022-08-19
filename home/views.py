@@ -1,4 +1,5 @@
 import json
+from urllib import response
 from django.shortcuts import render
 from django.http import JsonResponse
 from datetime import date, datetime
@@ -15,6 +16,7 @@ from rest_framework.permissions import IsAuthenticated
 
 @login_required()
 def index(request):
+
     return render(request, 'dashboard.html')
 
 @csrf_exempt
@@ -96,11 +98,10 @@ class DashboardData(APIView):
             })
         
         response = {
+            'selection_date':selected_month,
             'accounts_status': accounts_status,
             'pending_points': pending_actionables,
             'watchout_points': watchout_points,
             'statutory_compliances': statutory_compliances
         }
-
-
         return Response(response)

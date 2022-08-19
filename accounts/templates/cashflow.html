@@ -1,105 +1,143 @@
-{% extends 'accounts_base.html' %}
-{% load static %}
-{% block title %}Accounts | Cashflow{% endblock title %}
-{% block active3 %}active{% endblock active3 %}
-{% block body %}
+{% extends 'accounts_base.html' %} {% load static %} {% block title %}Accounts | Cashflow{% endblock title %} {% block active3 %}active{% endblock active3 %} {% block body %}
+<div class="shadow-sm customCard">
+    <div class="customCard-header">
+        <strong>CashFlow </strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="customCard-body">
+        <p>The Income Statement indicates a company's financial performance measured over a reporting period.Performance is assessed by summarising how the business incurs its revenues,expenses and net profit or loss incurred over the period.It's also called
+            as P&L statement</p>
+    </div>
+</div>
 <div class="box" style="margin-top: 20px;">
-  <table class="table" style="border-style: dotted;">
-    <h2>Cashflow</h2>
-  </table>
+    <table class="table" style="border-style: dotted;">
+        <h2>Cashflow</h2>
+    </table>
 </div>
 
-<!-- <table class="table " style="width:100%;margin-top:20px;">
-  <thead>
-    <tr>
-      <th scope="col"> CFO </th>
-      <th scope="col"> CFI </th>
-      <th scope="col"> CFF </th>
-      <th scope="col"> Cash & Bank </th>
-    </tr>
-  </thead>
-  <tbody>
-    <td>INR 6.2 Lacs</td>
-    <td>INR 3.1 Lacs</td>
-    <td>INR 3.1 Lacs</td>
-    <td>INR 2.1 Lacs</td>
-  </tbody>
-</table> -->
+<table data-cols-width="35,20,20,20" class="alltables">
+    <tbody>
+        <tr>
+            <td data-exclude="true">
+                <table class="table" data-cols-width="50" hidden>
+                    <thead>
+                        <tr data-fill-color="FFFFOOOO">
+                            <td colspan="4" data-f-bold="true" data-a-h="center">Company Name</td>
+                        </tr>
+                        <tr data-fill-color="FFFFOOOO">
+                            <td colspan="4" data-f-bold="true" data-a-h="center">Date</td>
+                        </tr>
+                        <tr data-fill-color="FFFFOOOO">
+                            <td colspan="4" data-f-bold="true" data-a-h="center">Cash Flow</td>
+                        </tr>
+                    </thead>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td data-exclude="true">
+                <div class="CollectBtns">
+                    <div class="row">
+                        <div class="col-12 dropDownBtn">
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                          Export As
+                        </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item" type="button" onclick="ExportExcel()">Excel</a></li>
+                                    <li><a class="dropdown-item" type="button" onclick="ExportPdf()">Pdf</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-striped table-bordered" id="cashflow">
+                        <thead>
+                            <tr>
+                                <th scope="col" style="width: 25%;" data-f-bold="true">Particulars</th>
+                                <th scope="col" style="width: 15%; text-align: center;" id="current_month" data-f-bold="true"></th>
+                                <th scope="col" style="width: 15%; text-align: center;" id="previous_month" data-f-bold="true"></th>
+                                <th scope="col" style="width: 15%; text-align: center;">Status</th>
+                                <th scope="col" style="width: 15%; text-align: center;" data-f-bold="true">% Increase / (decrease) </th>
+                                <th scope="col" style="width: 20%; text-align: center;" data-f-bold="true">What does it mean?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr id="beg_cash_bal">
+                            </tr>
+                            <tr>
+                                <td colspan="6"></td>
+                            </tr>
+                            <tr id="cashflowAMain" class="accordion-toggle" data-bs-toggle="collapse" data-bs-target="#cashflowA_hiddenBody" aria-expanded="true" aria-controls="cashflowA_hiddenBody">
+                                <th scope="row" colspan="6" data-f-bold="true">A. Cash Flow from Operating Activities</th>
+                            </tr>
+                            <tr data-exclude="true">
+                                <td colspan="6" data-exclude="true">
+                                    <div id="cashflowA_hiddenBody" class="accordion-collapse collapse" aria-labelledby="cashflowAMain">
+                                        <table class="table mb-0" id="cashflowA">
+                                            <tbody>
 
-<table class="table table-striped table-bordered" id="cashflow">
-  <thead>
-    <tr>
-      <th scope="col" style="width: 40%;">ACCOUNT</th>
-      <th scope="col" style="width: 20%; text-align: right;" id="current_month"></th>
-      <th scope="col" style="width: 20%; text-align: right;" id="previous_month"></th>
-      <th scope="col" style="width: 20%; text-align: center;">% Change</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr id="beg_cash_bal">
-    </tr>
-    <tr>
-      <td colspan="5"></td>
-    </tr>
-    <tr>
-      <th scope="row" colspan="5">A. Cash Flow from Operating Activities</th>
-    </tr>
-    <tr>
-      <td colspan="5">
-        <table class="table mb-0" id="cashflowA">
-          <tbody>
-          </tbody>
-        </table>
-      </td>
-    </tr>
-    <tr id="netA">
-    </tr>
-    <tr>
-      <td colspan="5"></td>
-    </tr>
-    <tr>
-      <th scope="row" colspan="5">B. Cash Flow from Investing Activities</th>
-    </tr>
-    <tr>
-      <td colspan="5">
-        <table class="table mb-0" id="cashflowB">
-          <tbody>
-          </tbody>
-        </table>
-      </td>
-    </tr>
-    <tr id="netB">
-    </tr>
-    <tr>
-      <td colspan="5"></td>
-    </tr>
-    <tr>
-      <th scope="row" colspan="5">C. Cash Flow from Financing Activities</th>
-    </tr>
-    <tr>
-      <td colspan="5">
-        <table class="table mb-0" id="cashflowC">
-          <tbody>
-          </tbody>
-        </table>
-      </td>
-    </tr>
-    <tr id="netC">
-    </tr>
-    <tr>
-      <td colspan="5"></td>
-    </tr>
-    <tr id="netABC">
-    </tr>
-    <tr>
-      <td colspan="5"></td>
-    </tr>
-    <tr id="endbal">
-    </tr>
-  </tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr id="netA">
+                            </tr>
+                            <tr>
+                                <td colspan="6"></td>
+                            </tr>
+                            <tr id="cashflowBMain" class="accordion-toggle" data-bs-toggle="collapse" data-bs-target="#cashflowB_hiddenBody" aria-expanded="true" aria-controls="cashflowB_hiddenBody">
+                                <th scope="row" colspan="6" data-f-bold="true">B. Cash Flow from Investing Activities</th>
+                            </tr>
+                            <tr data-exclude="true">
+                                <td colspan="6" data-exclude="true">
+                                    <div id="cashflowB_hiddenBody" class="accordion-collapse collapse" aria-labelledby="cashflowBMain">
+                                        <table class="table mb-0" id="cashflowB">
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </td>
+                            </tr>
+                            <tr id="netB">
+                            </tr>
+                            <tr>
+                                <td colspan="6"></td>
+                            </tr>
+                            <tr id="cashflowCMain" class="accordion-toggle" data-bs-toggle="collapse" data-bs-target="#cashflowC_hiddenBody" aria-expanded="true" aria-controls="cashflowC_hiddenBody">
+                                <th scope="row" colspan="6" data-f-bold="true">C. Cash Flow from Financing Activities</th>
+                            </tr>
+                            <tr data-exclude="true">
+                                <td colspan="6" data-exclude="true">
+                                    <div id="cashflowC_hiddenBody" class="accordion-collapse collapse" aria-labelledby="cashflowCMain">
+                                        <table class="table mb-0" id="cashflowC">
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </td>
+                            </tr>
+                            <tr id="netC">
+                            </tr>
+                            <tr>
+                                <td colspan="6"></td>
+                            </tr>
+                            <tr id="netABC">
+                            </tr>
+                            <tr>
+                                <td colspan="6"></td>
+                            </tr>
+                            <tr id="endbal">
+                            </tr>
+                        </tbody>
+                    </table>
+            </td>
+        </tr>
+    </tbody>
 </table>
-{% endblock body %}
 
-{% block script %}
+{% endblock body %} {% block script %}
 <script src="{% static 'js/cashflow.js' %}"></script>
 {% endblock script %}

@@ -50,7 +50,7 @@ class ZohoAccount(models.Model):
     client = models.ForeignKey(User, on_delete=models.CASCADE)
     account_id = models.CharField(max_length=30, primary_key=True)
     account_name = models.CharField(max_length=100)
-    account_for_coding = models.CharField(max_length=50, choices=account_for_coding_choice, default='accounts_receivable')
+    account_for_coding = models.CharField(max_length=50, choices=account_for_coding_choice, default='accounts_receivable',blank=True,null=True)
     account_code = models.CharField(max_length=30, blank=True, null=True)
     account_type = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)

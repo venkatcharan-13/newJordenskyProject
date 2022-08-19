@@ -1,0 +1,18 @@
+{
+    "incomeInfo": {
+        "head": "What is an Income Statement?",
+        "content": "The Income Statement indicates a company's financial performance measured over a reporting period.Performance is assessed by summarising how the business incures it's revenues,expenses and net profit or loss incurred over the period.It's also called P & L Statement"
+    },
+    "balanceSheetInfo": {
+        "head": "What is Balance Sheet?",
+        "content": "A balance sheet outlines a company's assets,liabilities and shareholders'equity at a given point in time.It's a snapshot of what a company owns and owes, and the amount is invested by shareholders.The balancing principle is Assets=Liabilities + Shareholders'equity"
+    },
+    "cashFlowInfo": {
+        "head": "What is Cashflow?",
+        "content": "A cashflow statement is a report of a company's cash management, which summarises all cash inflows that a company receives from its operations and investment sources,as well as cash outflows involved in the functioning of the business and investments, if any, by the company"
+    },
+    "ratiosInfo": {
+        "head": "What is Ratios?",
+        "content": "A financial ratio is used to calculate a company's financia status or performance against other companies.To calculate financial ration, numbers are taken from the balance sheet,income statement,and cash flow statement."
+    }
+}

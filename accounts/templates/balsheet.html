@@ -1,208 +1,505 @@
-{% extends 'accounts_base.html' %}
-{% load static %}
-{% block title %}Accounts | Balance Sheet{% endblock title %}
-{% block active2 %}active{% endblock active2 %}
-{% block body %}
-<div class="box" style="margin-top: 20px;">
-  <table class="table" style="border-style: dotted;">
-    <h2>Balancesheet</h2>
-  </table>
+{% extends 'accounts_base.html' %} {% load static %} {% block title %}Accounts | Balance Sheet{% endblock title %} {% block active2 %}active{% endblock active2 %} {% block body %}
+
+<div class="shadow-sm customCard">
+    <div class="customCard-header">
+        <strong>Balance Sheet?</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="customCard-body">
+        <p>The Income Statement indicates a company's financial performance measured over a reporting period.Performance is assessed by summarising how the business incurs its revenues,expenses and net profit or loss incurred over the period.It's also called
+            as P&L statement</p>
+    </div>
 </div>
 
-<table class="table " style="width:100%;margin-top:20px;">
-  <thead>
-    <tr>
-      <th scope="col"> Equity </th>
-      <th scope="col"> Liabilities </th>
-      <th scope="col"> Total Assets </th>
-    </tr>
-  </thead>
-  <tbody>
-    <td id="head_equity"></td>
-    <td id="head_liabilities"></td>
-    <td id="head_assets"></td>
-  </tbody>
+
+<table data-cols-width="40,30,30,30" class="alltables">
+    <tbody>
+        <tr>
+            <td data-exclude="true">
+                <table class="table" data-cols-width="50" hidden>
+                    <thead>
+                        <tr data-fill-color="FFFFOOOO">
+                            <td colspan="7" data-f-bold="true" data-a-h="center" data-b-t-s="thin" data-b-l-s="thin" data-b-r-s="thin">Company Name</td>
+                        </tr>
+                        <tr data-fill-color="FFFFOOOO">
+                            <td colspan="7" data-f-bold="true" data-a-h="center" data-b-l-s="thin" data-b-r-s="thin">Date</td>
+                        </tr>
+                        <tr data-fill-color="FFFFOOOO">
+                            <td colspan="7" data-f-bold="true" data-a-h="center" data-b-l-s="thin" data-b-r-s="thin" data-b-b-s="thin">P And L </td>
+                        </tr>
+                    </thead>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td data-exclude="true">
+                <div class="forTopTable">
+                    <div class="shadow-sm topTable">
+                        <table class="table table-borderless">
+                            <thead>
+                                <tr>
+                                    <th scope="col" data-f-bold="true" class="topTableColumn"> Assets </th>
+                                    <th scope="col" data-f-bold="true" class="topTableColumn"> Liabilities </th>
+                                    <th scope="col" data-f-bold="true" class="topTableColumn"> Equity </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <td id="head_assets" class="topTableColumn"></td>
+                                <td id="head_liabilities" class="topTableColumn"></td>
+                                <td id="head_equity" class="topTableColumn"></td>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="box">
+                    <table class="table">
+                        <h2>Balancesheet</h2>
+                    </table>
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td data-exclude="true">
+
+                <div class="row">
+                    <div class="col-12 dropDownBtn">
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                              Export As
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                                <li><a class="dropdown-item" type="button" onclick="ExportExcel()">Excel</a></li>
+                                <li><a class="dropdown-item" type="button" onclick="ExportPdf()">Pdf</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <th style="width: 30%;">Particulars</th>
+                        <th style="width: 15%;" id="current_month_date"></th>
+                        <th style="width: 15%;" id="previous_month_date"></th>
+                        <th style="width: 15%;">Status</th>
+                        <th style="width: 20%;">% Increase / (decrease) </th>
+                    </thead>
+                    <tbody>
+                        <tr id="assets_total" class="accordion-toggle" data-bs-toggle="collapse" data-bs-target="#assets_hiddenBody" aria-expanded="true" aria-controls="assets_hiddenBody">
+                            <td colspan="5">
+                                Assets
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">
+                                <div id="assets_hiddenBody" class="accordion-collapse collapse" aria-labelledby="assets_total">
+                                    <table class="table table-striped">
+                                        <tbody>
+                                            <tr id="fixedAssetsMain" class="accordion-toggle" data-bs-toggle="collapse" data-bs-target="#fixedAssets_hiddenBody" aria-expanded="true" aria-controls="fixedAssets_hiddenBody">
+                                                <th scope="row" colspan="5" data-f-bold="true">Fixed Assets</th>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="5" data-exclude="true">
+                                                    <div id="fixedAssets_hiddenBody" class="accordion-collapse collapse" aria-labelledby="fixedAssetsMain">
+                                                        <table class="table mb-0" id="fixasset">
+                                                            <tbody>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+                                            <tr id="otherAssetsMain" class="accordion-toggle" data-bs-toggle="collapse" data-bs-target="#otherAssets_hiddenBody" aria-expanded="true" aria-controls="otherAssets_hiddenBody">
+                                                <th scope="row" colspan="5" data-f-bold="true">Other Assets</th>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="5" data-exclude="true">
+                                                    <div id="otherAssets_hiddenBody" class="accordion-collapse collapse" aria-labelledby="otherAssetsMain">
+                                                        <table class="table mb-0" id="othasset">
+                                                            <tbody>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr id="accRecMain" class="accordion-toggle" data-bs-toggle="collapse" data-bs-target="#accRec_hiddenBody" aria-expanded="true" aria-controls="accRec_hiddenBody">
+                                                <th scope="row" colspan="5" data-f-bold="true">Accounts Receivable</th>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="5" data-exclude="true">
+                                                    <div id="accRec_hiddenBody" class="accordion-collapse collapse" aria-labelledby="accRecMain">
+                                                        <table class="table mb-0" id="acc_rec">
+                                                            <tbody>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                            <tr id="bankMain" class="accordion-toggle" data-bs-toggle="collapse" data-bs-target="#bank_hiddenBody" aria-expanded="true" aria-controls="bank_hiddenBody">
+                                                <th scope="row" colspan="5" data-f-bold="true">Bank</th>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="5" data-exclude="true">
+                                                    <div id="bank_hiddenBody" class="accordion-collapse collapse" aria-labelledby="bankMain">
+                                                        <table class="table mb-0" id="bank">
+                                                            <tbody>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                            <tr id="cashMain" class="accordion-toggle" data-bs-toggle="collapse" data-bs-target="#cash_hiddenBody" aria-expanded="true" aria-controls="cash_hiddenBody">
+                                                <th scope="row" colspan="5" data-f-bold="true">Cash</th>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="5" data-exclude="true">
+                                                    <div id="cash_hiddenBody" class="accordion-collapse collapse" aria-labelledby="cashMain">
+                                                        <table class="table mb-0" id="cash">
+                                                            <tbody>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                            <tr id="OCAMain" class="accordion-toggle" data-bs-toggle="collapse" data-bs-target="#OCA_hiddenBody" aria-expanded="true" aria-controls="OCA_hiddenBody">
+                                                <th scope="row" colspan="5" data-f-bold="true">Other Current Asset</th>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="5" data-exclude="true">
+                                                    <div id="OCA_hiddenBody" class="accordion-collapse collapse" aria-labelledby="OCAMain">
+                                                        <table class="table mb-0" id="ocasset">
+                                                            <tbody>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr id="stockMain" class="accordion-toggle" data-bs-toggle="collapse" data-bs-target="#stock_hiddenBody" aria-expanded="true" aria-controls="stock_hiddenBody">
+                                                <th scope="row" colspan="5" data-f-bold="true">Stock</th>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="5" data-exclude="true">
+                                                    <div id="stock_hiddenBody" class="accordion-collapse collapse" aria-labelledby="stockMain">
+                                                        <table class="table mb-0" id="stock">
+                                                            <tbody>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </td>
+                        </tr>
+                        <tr id="liability_total" class="accordion-toggle" data-bs-toggle="collapse" data-bs-target="#liability_hiddenBody" aria-expanded="true" aria-controls="liability_hiddenBody">
+                            <td colspan="5">
+                                Liability
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">
+                                <div id="liability_hiddenBody" class="accordion-collapse collapse" aria-labelledby="liability_total">
+                                    <table class="table table-striped">
+                                        <tbody>
+                                            <tr id="LTLMain" class="accordion-toggle" data-bs-toggle="collapse" data-bs-target="#LTL_hiddenBody" aria-expanded="true" aria-controls="LTL_hiddenBody">
+                                                <th scope="row" colspan="4" data-f-bold="true">Long Term Liability</th>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4" data-exclude="true">
+                                                    <div id="LTL_hiddenBody" class="accordion-collapse collapse" aria-labelledby="LTLMain"></div>
+                                                    <table class="table mb-0" id="ltliab">
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr id="OLMain" class="accordion-toggle" data-bs-toggle="collapse" data-bs-target="#OL_hiddenBody" aria-expanded="true" aria-controls="OL_hiddenBody">
+                                                <th scope="row" colspan="4" data-f-bold="true">Other Liability</th>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4" data-exclude="true">
+                                                    <div id="OL_hiddenBody" class="accordion-collapse collapse" aria-labelledby="OLMain"></div>
+                                                    <table class="table mb-0" id="othliab">
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr id="APMain" class="accordion-toggle" data-bs-toggle="collapse" data-bs-target="#AP_hiddenBody" aria-expanded="true" aria-controls="AP_hiddenBody">
+                                                <th scope="row" colspan="4" data-f-bold="true">Accounts Payable</th>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4" data-exclude="true">
+                                                    <div id="AP_hiddenBody" class="accordion-collapse collapse" aria-labelledby="APMain">
+                                                        <table class="table mb-0" id="acc_pay">
+                                                            <tbody>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+
+                                            <tr id="OCLMain" class="accordion-toggle" data-bs-toggle="collapse" data-bs-target="#OCL_hiddenBody" aria-expanded="true" aria-controls="OCL_hiddenBody">
+                                                <th scope="row" colspan="4" data-f-bold="true">Other Current Liability</th>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="4" data-exclude="true">
+                                                    <div id="OCL_hiddenBody" class="accordion-collapse collapse" aria-labelledby="OCLMain">
+                                                        <table class="table mb-0" id="ocliab">
+                                                            <tbody>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr id="equity_total" class="accordion-toggle" data-bs-toggle="collapse" data-bs-target="#equity_hiddenBody" aria-expanded="true" aria-controls="equity_hiddenBody">
+                            <td colspan="5">
+                                Equity
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">
+                                <div id="equity_hiddenBody" class="accordion-collapse collapse" aria-labelledby="equity_total">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr id="equityMain" class="accordion-toggle" data-bs-toggle="collapse" data-bs-target="#equity_hiddenBody" aria-expanded="true" aria-controls="equity_hiddenBody">
+                                                <th scope="row" colspan="5" data-f-bold="true">Equity</th>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="5" data-exclude="true">
+                                                    <div id="equity_hiddenBody" class="accordion-collapse collapse" aria-labelledby="equityMain">
+                                                        <table class="table mb-0" id="equity">
+                                                            <tbody>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
 </table>
+<!-- <table class="table table-striped table-bordered" id="assets">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="width: 30%;" data-f-bold="true">ASSETS</th>
+                            <th scope="col" style="width: 20%; text-align: right;" id="current_month_assets" data-f-bold="true"></th>
+                            <th scope="col" style="width: 20%; text-align: right;" id="previous_month_assets" data-f-bold="true"></th>
+                            <th scope="col" style="width: 10%; text-align: right;" data-f-bold="true">Status</th>
+                            <th scope="col" style="width: 20%; text-align: center;" data-f-bold="true">% Change</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row" colspan="5" data-f-bold="true">Fixed Assets</th>
+                        </tr>
+                        <tr>
+                            <td colspan="5" data-exclude="true">
+                                <table class="table mb-0" id="fixasset">
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" colspan="5" data-f-bold="true">Other Assets</th>
+                        </tr>
+                        <tr>
+                            <td colspan="5" data-exclude="true">
+                                <table class="table mb-0" id="othasset">
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" colspan="5" data-f-bold="true">Accounts Receivable</th>
+                        </tr>
+                        <tr>
+                            <td colspan="5" data-exclude="true">
+                                <table class="table mb-0" id="acc_rec">
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" colspan="5" data-f-bold="true">Bank</th>
+                        </tr>
+                        <tr>
+                            <td colspan="5" data-exclude="true">
+                                <table class="table mb-0" id="bank">
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" colspan="5" data-f-bold="true">Cash</th>
+                        </tr>
+                        <tr>
+                            <td colspan="5" data-exclude="true">
+                                <table class="table mb-0" id="cash">
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" colspan="5" data-f-bold="true">Other Current Asset</th>
+                        </tr>
+                        <tr>
+                            <td colspan="5" data-exclude="true">
+                                <table class="table mb-0" id="ocasset">
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" colspan="5" data-f-bold="true">Stock</th>
+                        </tr>
+                        <tr>
+                            <td colspan="5" data-exclude="true">
+                                <table class="table mb-0" id="stock">
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td data-exclude="true">
 
-<table class="table table-striped table-bordered" id="assets">
-  <thead>
-    <tr>
-      <th scope="col" style="width: 40%;">ASSETS</th>
-      <th scope="col" style="width: 20%; text-align: right;" id="current_month_assets"></th>
-      <th scope="col" style="width: 20%; text-align: right;" id="previous_month_assets"></th>
-      <th scope="col" style="width: 20%; text-align: center;">% Change</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row" colspan="4">Fixed Assets</th>
-    </tr>
-    <tr>
-      <td colspan="4">
-        <table class="table mb-0" id="fixasset">
-          <tbody>
-          </tbody>
-        </table>
-      </td>
-    </tr>
-    <tr>
-      <th scope="row" colspan="4">Other Assets</th>
-    </tr>
-    <tr>
-      <td colspan="4">
-        <table class="table mb-0" id="othasset">
-          <tbody>
-          </tbody>
-        </table>
-      </td>
-    </tr>
-    <!-- <tr>
-      <th scope="row" colspan="4">Accounts Receivable</th>
-    </tr> -->
-    <tr>
-      <td colspan="4">
-        <table class="table mb-0" id="acc_rec">
-          <tbody>
-          </tbody>
-        </table>
-      </td>
-    </tr>
-    <tr><td></td></tr>
-    <!-- <tr>
-      <th scope="row" colspan="4">Bank</th>
-    </tr> -->
-    <tr>
-      <td colspan="4">
-        <table class="table mb-0" id="bank">
-          <tbody>
-          </tbody>
-        </table>
-      </td>
-    </tr>
-    <tr><td></td></tr>
-    <!-- <tr>
-      <th scope="row" colspan="4">Cash</th>
-    </tr> -->
-    <tr>
-      <td colspan="4">
-        <table class="table mb-0" id="cash">
-          <tbody>
-          </tbody>
-        </table>
-      </td>
-    </tr>
-    <tr><td></td></tr>
-    <tr>
-      <th scope="row" colspan="4">Other Current Asset</th>
-    </tr>
-    <tr>
-      <td colspan="4">
-        <table class="table mb-0" id="ocasset">
-          <tbody>
-          </tbody>
-        </table>
-      </td>
-    </tr>
-    <tr>
-      <th scope="row" colspan="4">Stock</th>
-    </tr>
-    <tr>
-      <td colspan="4">
-        <table class="table mb-0" id="stock">
-          <tbody>
-          </tbody>
-        </table>
-      </td>
-    </tr>
-  </tbody>
-</table>
+                <table class="table table-striped table-bordered" id="liabilities">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="width: 40%;" data-f-bold="true">LIABILITIES</th>
+                            <th scope="col" style="width: 20%; text-align: right;" id="current_month_liabilities" data-f-bold="true"></th>
+                            <th scope="col" style="width: 20%; text-align: right;" id="previous_month_liabilities" data-f-bold="true"></th>
+                            <th scope="col" style="width: 20%; text-align: center;" data-f-bold="true">% Change</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row" colspan="4" data-f-bold="true">Long Term Liability</th>
+                        </tr>
+                        <tr>
+                            <td colspan="4" data-exclude="true">
+                                <table class="table mb-0" id="ltliab">
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" colspan="4" data-f-bold="true">Other Liability</th>
+                        </tr>
+                        <tr>
+                            <td colspan="4" data-exclude="true">
+                                <table class="table mb-0" id="othliab">
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" colspan="4" data-f-bold="true">Accounts Payable</th>
+                        </tr>
+                        <tr>
+                            <td colspan="4" data-exclude="true">
+                                <table class="table mb-0" id="acc_pay">
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th scope="row" colspan="4" data-f-bold="true">Other Current Liability</th>
+                        </tr>
+                        <tr>
+                            <td colspan="4" data-exclude="true">
+                                <table class="table mb-0" id="ocliab">
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
 
-<table class="table table-striped table-bordered" id="liabilities">
-  <thead>
-    <tr>
-      <th scope="col" style="width: 40%;">LIABILITIES</th>
-      <th scope="col" style="width: 20%; text-align: right;" id="current_month_liabilities"></th>
-      <th scope="col" style="width: 20%; text-align: right;" id="previous_month_liabilities"></th>
-      <th scope="col" style="width: 20%; text-align: center;">% Change</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row" colspan="4">Long Term Liability</th>
-    </tr>
-    <tr>
-      <td colspan="4">
-        <table class="table mb-0" id="ltliab">
-          <tbody>
-          </tbody>
-        </table>
-      </td>
-    </tr>
-    <tr>
-      <th scope="row" colspan="4">Other Liability</th>
-    </tr>
-    <tr>
-      <td colspan="4">
-        <table class="table mb-0" id="othliab">
-          <tbody>
-          </tbody>
-        </table>
-      </td>
-    </tr>
-    <!-- <tr>
-      <th scope="row" colspan="4">Accounts Payable</th>
-    </tr> -->
-    <tr>
-      <td colspan="4">
-        <table class="table mb-0" id="acc_pay">
-          <tbody>
-          </tbody>
-        </table>
-      </td>
-    </tr>
-    <tr><td></td></tr>
-    <tr>
-      <th scope="row" colspan="4">Other Current Liability</th>
-    </tr>
-    <tr>
-      <td colspan="4">
-        <table class="table mb-0" id="ocliab">
-          <tbody>
-          </tbody>
-        </table>
-      </td>
-    </tr>
-  </tbody>
-</table>
+            </td>
+        </tr>
+        <tr>
+            <td data-exclude="true">
+                <table class="table table-striped table-bordered" id="liabilities">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="width: 40%;" data-f-bold="true">EQUITIES</th>
+                            <th scope="col" style="width: 20%; text-align: right;" id="current_month_equity" data-f-bold="true"></th>
+                            <th scope="col" style="width: 20%; text-align: right;" id="previous_month_equity" data-f-bold="true"></th>
+                            <th scope="col" style="width: 20%; text-align: center;" data-f-bold="true">% Change</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row" colspan="4" data-f-bold="true">Equity</th>
+                        </tr>
+                        <tr>
+                            <td colspan="4" data-exclude="true">
+                                <table class="table mb-0" id="equity">
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table> -->
 
-<table class="table table-striped table-bordered" id="liabilities">
-  <thead>
-    <tr>
-      <th scope="col" style="width: 40%;">EQUITIES</th>
-      <th scope="col" style="width: 20%; text-align: right;" id="current_month_equity"></th>
-      <th scope="col" style="width: 20%; text-align: right;" id="previous_month_equity"></th>
-      <th scope="col" style="width: 20%; text-align: center;">% Change</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row" colspan="4">Equity</th>
-    </tr>
-    <tr>
-      <td colspan="4">
-        <table class="table mb-0" id="equity">
-          <tbody>
-          </tbody>
-        </table>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script> -->
 
-{% endblock body %}
-
-{% block script %}
+{% endblock body %} {% block script %}
 <script src="{% static 'js/balsheet.js' %}"></script>
 {% endblock script %}

@@ -1,37 +1,40 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block current2 %} current {% endblock current2 %}
-{% block title %}Accounts | Cashflow Balances{% endblock title %}
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block current2 %} current {% endblock current2 %} {% block title %}Accounts | Cashflow Balances{% endblock title %} {% block content %}
 
 <h1>Balances for {{ activity }}</h1>
 <table class="table table-bordered">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Account name</th>
-      <th scope="col" style="text-align:right;">{{ current_period }}</th>
-      <th scope="col" style="text-align:right;">{{ previous_period }}</th>
-      <th scope="col" style="text-align:center;">Change</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for transaction, trans_detail in response_data.items %}
-    <tr>
-      <th scope="row">{{ forloop.counter }}</th>
-      <th>{{ transaction }}</th>
-      <td style="text-align:right;">{{ trans_detail.current }}</td>
-      <td style="text-align:right;">{{ trans_detail.previous }}</td>
-      <td style="text-align:center;">{{ trans_detail.change }}</td>
-    </tr>
-    {% endfor %}
-    <tr>
-      <th colspan="2">Total</th>
-      <th style="text-align:right;">{{ totals.current }}</th>
-      <th style="text-align:right;">{{ totals.previous }}</th>
-      <th style="text-align:center;">{{ totals.change }}</th>
-    </tr>
-  </tbody>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Account name</th>
+            <th scope="col" style="text-align:right;">{{ current_period }}</th>
+            <th scope="col" style="text-align:right;">{{ previous_period }}</th>
+            <th scope="col" style="text-align:center;">Change</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for transaction, trans_detail in response_data.items %}
+        <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <th>{{ transaction }}</th>
+            <td style="text-align:right;">{{ trans_detail.current }}</td>
+            <td style="text-align:right;">{{ trans_detail.previous }}</td>
+            <!-- <td style="text-align:center;">{{ trans_detail.change }}</td> -->
+            {% if trans_detail.change == '>100' or trans_detail.change > 0 %}
+            <td style="text-align:center;color:green">{{ trans_detail.change }}%</td>
+            {% elif trans_detail.change == 0 %}
+            <td style="text-align:center;color:black">{{ trans_detail.change }}%</td>
+            {% else %}
+            <td style="text-align:center;color:red">{{ trans_detail.change }}%</td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+        <tr>
+            <th colspan="2">Total</th>
+            <th style="text-align:right;">{{ totals.current }}</th>
+            <th style="text-align:right;">{{ totals.previous }}</th>
+            <th style="text-align:center;">{{ totals.change }}</th>
+        </tr>
+    </tbody>
 </table>
 
 {% endblock content %}

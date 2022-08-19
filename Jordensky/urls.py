@@ -16,17 +16,22 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+# from authentication import views
+# from .views import *
+
 admin.site.site_header = "JordenSky Admin"
 admin.site.site_title = "JordenSky Admin Portal"
 admin.site.index_title = "Welcome to JordenSky Admin Portal"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # path('auth/user/add',views.createUser,name='create user'),
     path('auth/', include('authentication.urls')),
     path('', include('home.urls')),
     path('analytics/', include('analytics.urls')),
     path('accounts/', include('accounts.urls')),
     path('taxes/', include('taxes.urls')),
     path('profile/', include('cprofile.urls')),
-    path('help/', include('help.urls'))
+    path('help/', include('help.urls')),
+   
 ]

@@ -1,82 +1,90 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block current2 %} current {% endblock current2 %}
-{% block title %}Accounts | Transaction Details{% endblock title %}
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block current2 %} current {% endblock current2 %} {% block title %}Accounts | Transaction Details{% endblock title %} {% block content %}
 
 <h1>Transactions for {{ account }}</h1>
 <table class="table table-bordered">
-  {% if account == "direct_income" or account == "indirect_income" %}
-  <thead>
-    <tr>
-      <th scope="col">Status</th>
-      <th scope="col">Name of Payee</th>
-      <th scope="col" style="text-align:right;">{{ current_period }}</th>
-      <th scope="col" style="text-align:right;">{{ previous_period }}</th>
-      <th scope="col" style="text-align:center;">% Change</th>
-      <th scope="col" style="text-align:right;">{{ pre_previous_period }}</th>
-      <th scope="col" style="text-align:center;">% Change</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for transaction, trans_detail in response_data.items %}
-    <tr>
-      <th scope="row">{{ trans_detail.payee_category }}</th>
-      {% if transaction == '' %}
-      <th>Others</th>
-      {% else %}
-      <th>{{ transaction }}</th>
-      {% endif %}
-      <td style="text-align:right;">{{ trans_detail.current }}</td>
-      <td style="text-align:right;">{{ trans_detail.previous }}</td>
-      <td style="text-align:center;">{{ trans_detail.per_change }}%</td>
-      <td style="text-align:right;">{{ trans_detail.pre_prev }}</td>
-      <td style="text-align:center;">{{ trans_detail.prev_per_change }}%</td>
-    </tr>
-    {% endfor %}
-    <tr>
-      <th colspan="2">Total</th>
-      <th style="text-align:right;">{{ totals.current }}</th>
-      <th style="text-align:right;">{{ totals.previous }}</th>
-      <th style="text-align:center;">{{ totals.per_change }}%</th>
-      <th style="text-align:right;">{{ totals.pre_prev }}</th>
-      <th style="text-align:center;">{{ totals.prev_per_change }}%</th>
-    </tr>
-  </tbody>
-  {% else %}
-  <thead>
-    <tr>
-      <th scope="col">Status</th>
-      <th scope="col">Name of Payee</th>
-      <th scope="col" style="text-align:right;">{{ current_period }}</th>
-      <th scope="col" style="text-align:right;">{{ previous_period }}</th>
-      <th scope="col" style="text-align:center;">% Change</th>
-      <th scope="col" style="text-align:right;">Avg of last 3 months</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for transaction, trans_detail in response_data.items %}
-    <tr>
-      <th scope="row">{{ trans_detail.payee_category }}</th>
-      {% if transaction == '' %}
-      <th>Others</th>
-      {% else %}
-      <th>{{ transaction }}</th>
-      {% endif %}
-      <td style="text-align:right;">{{ trans_detail.current }}</td>
-      <td style="text-align:right;">{{ trans_detail.previous }}</td>
-      <td style="text-align:center;">{{ trans_detail.per_change }}%</td>
-      <td style="text-align:right;">{{ trans_detail.three_month_avg }}</td>
-    </tr>
-    {% endfor %}
-    <tr>
-      <th colspan="2">Total</th>
-      <th style="text-align:right;">{{ totals.current }}</th>
-      <th style="text-align:right;">{{ totals.previous }}</th>
-      <th style="text-align:center;">{{ totals.per_change }}%</th>
-      <th style="text-align:right;">{{ totals.three_month_avg }}</th>
-    </tr>
-  </tbody>
-  {% endif %}
+    {% if account == "direct_income" or account == "indirect_income" %}
+    <thead>
+        <tr>
+            <th scope="col">Status</th>
+            <th scope="col">Name of Payee</th>
+            <th scope="col" style="text-align:right;">{{ current_period }}</th>
+            <th scope="col" style="text-align:right;">{{ previous_period }}</th>
+            <th scope="col" style="text-align:center;">% Change</th>
+            <th scope="col" style="text-align:right;">{{ pre_previous_period }}</th>
+            <th scope="col" style="text-align:center;">% Change</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for transaction, trans_detail in response_data.items %}
+        <tr>
+            <th scope="row">{{ trans_detail.payee_category }}</th>
+            {% if transaction == '' %}
+            <th>Others</th>
+            {% else %}
+            <th>{{ transaction }}</th>
+            {% endif %}
+            <td style="text-align:right;">{{ trans_detail.current }}</td>
+            <td style="text-align:right;">{{ trans_detail.previous }}</td>
+            {% if trans_detail.per_change == '>100' or trans_detail.per_change > 0 %}
+            <td style="text-align:center;color:green">{{ trans_detail.per_change }}%</td>
+            {% elif trans_detail.per_change == 0 %}
+            <td style="text-align:center;color:black">{{ trans_detail.per_change }}%</td>
+            {% else %}
+            <td style="text-align:center;color:red">{{ trans_detail.per_change }}%</td>
+            {% endif %}
+            <td style="text-align:right;">{{ trans_detail.pre_prev }}</td>
+            <td style="text-align:center;">{{ trans_detail.prev_per_change }}%</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <th colspan="2">Total</th>
+            <th style="text-align:right;">{{ totals.current }}</th>
+            <th style="text-align:right;">{{ totals.previous }}</th>
+            <th style="text-align:center;">{{ totals.per_change }}%</th>
+            <th style="text-align:right;">{{ totals.pre_prev }}</th>
+            <th style="text-align:center;">{{ totals.prev_per_change }}%</th>
+        </tr>
+    </tbody>
+    {% else %}
+    <thead>
+        <tr>
+            <th scope="col">Status</th>
+            <th scope="col">Name of Payee</th>
+            <th scope="col" style="text-align:right;">{{ current_period }}</th>
+            <th scope="col" style="text-align:right;">{{ previous_period }}</th>
+            <th scope="col" style="text-align:center;">% Change</th>
+            <th scope="col" style="text-align:right;">Avg of last 3 months</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for transaction, trans_detail in response_data.items %}
+        <tr>
+            <th scope="row">{{ trans_detail.payee_category }}</th>
+            {% if transaction == '' %}
+            <th>Others</th>
+            {% else %}
+            <th>{{ transaction }}</th>
+            {% endif %}
+            <td style="text-align:right;">{{ trans_detail.current }}</td>
+            <td style="text-align:right;">{{ trans_detail.previous }}</td>
+            {% if trans_detail.per_change == '>100' or trans_detail.per_change > 0 %}
+            <td style="text-align:center;color:red">{{ trans_detail.per_change }}%</td>
+            {% elif trans_detail.per_change == 0 %}
+            <td style="text-align:center;color:black">{{ trans_detail.per_change }}%</td>
+            {% else %}
+            <td style="text-align:center;color:green">{{ trans_detail.per_change }}%</td>
+            {% endif %}
+            <td style="text-align:right;">{{ trans_detail.three_month_avg }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <th colspan="2">Total</th>
+            <th style="text-align:right;">{{ totals.current }}</th>
+            <th style="text-align:right;">{{ totals.previous }}</th>
+            <th style="text-align:center;">{{ totals.per_change }}%</th>
+            <th style="text-align:right;">{{ totals.three_month_avg }}</th>
+        </tr>
+    </tbody>
+    {% endif %}
 </table>
 {% endblock content %}

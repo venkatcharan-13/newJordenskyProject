@@ -1,33 +1,26 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'base.css' %}"> {% block static %}{% endblock static %}
-    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-
-    <!-- JavaScript Bundle with Popper -->
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
-    <title>{% block title %}{% endblock title %}</title>
-
+    <style>
+        .topnav {
+            overflow: hidden;
+        }
+        
+        .topnav a {
+            float: left;
+            color: black;
+            padding: 14px 16px;
+            font-size: 25px;
+        }
+    </style>
 </head>
 
-<body class="body">
-    <div class="topnav" id="navbar">
-        <div class="float-start">
-            <img src="https://cdn-0.motorcycle-logos.com/wp-content/uploads/2016/10/KTM-logo-768x381.png" alt="Company Logo" width="200" height="55">
-        </div>
+<body>
+    <div class="topnav">
         <div class="float-end">
             <ul>
                 <a class="nav-link TopIcons" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNotification" aria-controls="offcanvasNotification">
@@ -42,6 +35,7 @@
                 <a class="nav-link TopIcons" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasProfile" aria-controls="offcanvasProfile">
                     <ion-icon name="person-circle-outline"></ion-icon>
                 </a>
+
             </ul>
         </div>
     </div>
@@ -90,42 +84,6 @@
 
         </div>
     </div>
-
-    <div class="sidenav">
-        <a href="/" class="{% block current1 %}{% endblock current1 %}">
-            <b><ion-icon name="home-outline" style="margin-right:2px"></ion-icon>Home</b></a>
-        <a href="/accounts" class="{% block current2 %}{% endblock current2 %}">
-            <b><ion-icon name="cellular-outline" style="margin-right:2px"></ion-icon> Accounts</b></a>
-        <a href="/analytics" class="{% block current3 %}{% endblock current3 %}">
-            <b> <ion-icon name="analytics" style="margin-right:2px"></ion-icon>Analytics</b></a>
-        <a href="/taxes" class="{% block current4 %}{% endblock current4 %}">
-            <b><ion-icon name="document-text-outline" style="margin-right:2px"></ion-icon>Taxes</b> </a>
-        <a href="/help" class="{% block current5 %}{% endblock current5 %}">
-            <b><ion-icon name="help-outline" style="margin-right:2px"></ion-icon>Help</b> </a>
-        <a href="/profile" class="{% block current6 %}{% endblock current6 %}">
-            <b><ion-icon name="person-outline" style="margin-right:2px"></ion-icon>Profile</b> </a>
-    </div>
-    <div class="main">
-
-        {% block content %}{% endblock content %}
-
-    </div>
-    <script>
-        window.onscroll = function() {
-            myFunction()
-        };
-
-        var navbar = document.getElementById("navbar");
-        var sticky = navbar.offsetTop;
-
-        function myFunction() {
-            if (window.pageYOffset >= sticky) {
-                navbar.classList.add("sticky")
-            } else {
-                navbar.classList.remove("sticky");
-            }
-        }
-    </script>
 </body>
 
 </html>

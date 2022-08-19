@@ -1,0 +1,216 @@
+<html>
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+    <a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+    Launch demo modal
+    </a>
+    <a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+        Launch demo modal 2
+        </a>
+    <a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+            Launch demo modal 3
+            </a>
+    <a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModa4">
+                Launch demo modal 4
+                </a>
+    <a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModa5">
+                    Launch demo modal 5
+                    </a>
+
+
+    <!-- <div class="modal-dialog modal-xl" id="exampleModal">...</div> -->
+    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    1
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    2
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table class="table">
+        <tbody>
+            <tr id="expense_total" class="accordion-toggle" data-bs-toggle="collapse" data-bs-target="#expense_hiddenBody" aria-expanded="true" aria-controls="expense_hiddenBody">
+                <th scope="row" colspan="7">Expenses</th>
+            </tr>
+            <tr data-exclude="true">
+                <td colspan="7">
+                    <div id="expense_hiddenBody" class="accordion-collapse collapse show" aria-labelledby="expense_total">
+                        <table class="table mb-0" id="expense">
+                            <tbody>
+                                <tr>
+                                    <td>ldskjfsalfjd;</td>
+                                </tr>
+                                <tr>
+                                    <td>sldfjsalfa;</td>
+                                </tr>
+                                <tr>
+                                    <td>dlfkafjals</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="modal-dialog modal-xl">...</div>
+    <div class="modal-dialog modal-lg">...</div>
+    <div class="modal-dialog modal-sm">...</div>
+</body>
+
+</html>
+
+
+<!--<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Export HTML Table to PDF</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+    <h2 style="text-align: center;">TOTAL MARKS OF STUDENTS</h2>
+    <br />
+    <table class="table" id="simple_table">
+        <tr>
+            <th>Roll No.</th>
+            <th>Name</th>
+            <th>Marks</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Ranjith</td>
+            <td>85</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Jeyanth</td>
+            <td>72</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Selvaraj</td>
+            <td>63</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Rohan</td>
+            <td>90</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Sandhya</td>
+            <td>82</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>Nayanthara</td>
+            <td>56</td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>charan</td>
+                            <td>venkat</td>
+                            <td>banotu</td>
+
+                        </tr>
+                    </tbody>
+
+                </table>
+            </td>
+        </tr>
+    </table>
+    <br />
+    <input type="button" onclick="generate()" value="Export To PDF" />
+    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.min.js"></script>
+    <script>
+        function generate() {
+            var doc = new jsPDF('p', 'pt', 'letter');
+            var htmlstring = '';
+            var tempVarToCheckPageHeight = 0;
+            var pageHeight = 0;
+            pageHeight = doc.internal.pageSize.height;
+            specialElementHandlers = {
+                // element with id of "bypass" - jQuery style selector  
+                '#bypassme': function(element, renderer) {
+                    // true = "handled elsewhere, bypass text extraction"  
+                    return true
+                }
+            };
+            margins = {
+                top: 150,
+                bottom: 60,
+                left: 40,
+                right: 40,
+                width: 600
+            };
+            var y = 20;
+            var x = 20;
+            doc.setLineWidth(2);
+            doc.text(200, y = y + 30, " MARKS OF STUDENTS", "left");
+            doc.autoTable({
+                html: '#simple_table',
+                startY: 70,
+                theme: 'grid',
+                columnStyles: {
+                    0: {
+                        cellWidth: 180,
+                    },
+                    1: {
+                        cellWidth: 180,
+                    },
+                    2: {
+                        cellWidth: 180,
+                    }
+                },
+                styles: {
+                    minCellHeight: 40
+                }
+            })
+            doc.save('Marks_Of_Students.pdf');
+        }
+    </script>
+</body>
+
+</html> -->
